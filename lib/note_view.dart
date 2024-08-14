@@ -44,15 +44,8 @@ class _NotesViewState extends State<NotesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
       appBar: AppBar(
-        backgroundColor: Colors.black87,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          ),
-        ],
+        title: const Text("Add your notes"),
       ),
       body: Center(
         child: notes.isEmpty
@@ -80,7 +73,7 @@ class _NotesViewState extends State<NotesView> {
                           Text(
                             note.title,
                             style:
-                            Theme.of(context).textTheme.headlineMedium,
+                            Theme.of(context).textTheme.headlineSmall,
                           ),
                         ],
                       ),

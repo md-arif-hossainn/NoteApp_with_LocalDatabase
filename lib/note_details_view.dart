@@ -28,6 +28,7 @@ class _NoteDetailsViewState extends State<NoteDetailsView> {
     super.initState();
   }
 
+
   ///Gets the note from the database and updates the state if the noteId is not null else it sets the isNewNote to true
   refreshNotes() {
     if (widget.noteId == null) {
@@ -60,9 +61,18 @@ class _NoteDetailsViewState extends State<NoteDetailsView> {
     );
     if (isNewNote) {
       noteDatabase.create(model);
+      Navigator.of(context).pop();
     } else {
-      model.id = note.id;
+     model.id = note.id;
       noteDatabase.update(model);
+     Navigator.of(context).pop();
+      /// if i want to copy previous id
+      // final updatedModel = model.copy(id: note.id);
+      // noteDatabase.update(updatedModel);
+      print(model.id);
+      print(model.title);
+      print(model.content);
+      print(model.createdTime);
     }
     setState(() {
       isLoading = false;
@@ -78,9 +88,8 @@ class _NoteDetailsViewState extends State<NoteDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
       appBar: AppBar(
-        backgroundColor: Colors.black87,
+        title: const Text("Add notes"),
         actions: [
           IconButton(
             onPressed: () {
@@ -111,9 +120,7 @@ class _NoteDetailsViewState extends State<NoteDetailsView> {
               : Column(children: [
             TextField(
               controller: titleController,
-              cursorColor: Colors.white,
               style: const TextStyle(
-                color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
@@ -121,24 +128,25 @@ class _NoteDetailsViewState extends State<NoteDetailsView> {
                 hintText: 'Title',
                 border: InputBorder.none,
                 hintStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
+                 // color: Colors.white,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             TextField(
               controller: contentController,
-              cursorColor: Colors.white,
+              maxLines: 10,
+             // cursorColor: Colors.white,
               style: const TextStyle(
-                color: Colors.white,
+               // color: Colors.white,
                 fontSize: 16,
               ),
               decoration: const InputDecoration(
                 hintText: 'Type your note here...',
                 border: InputBorder.none,
                 hintStyle: TextStyle(
-                  color: Colors.white,
+               //   color: Colors.white,
                   fontSize: 16,
                 ),
               ),

@@ -21,7 +21,7 @@ class NoteFields {
 }
 
 class NoteModel {
-  late final int? id;
+  late  int? id;
   final int? number;
   final String title;
   final String content;
